@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>见一面多一面 · 产品计划书</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #1a1612;
+    --warm: #f5f0e8;
+    --cream: #faf7f2;
+    --terracotta: #c4603a;
+    --sand: #d4a96a;
+    --sage: #7a8c6e;
+    --dust: #b8a898;
+    --light-line: #e8e0d4;
+    --section-gap: 120px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .nav-logo {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--dust);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 160px 60px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    color: var(--terracotta);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 900;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--terracotta);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: #6b5f52;
+    max-width: 420px;
+    margin-bottom: 56px;
+    line-height: 2;
+  }
+
+  .hero-quote {
+    border-left: 2px solid var(--sand);
+    padding-left: 20px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.92rem;
+    color: var(--dust);
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  .hero-right {
+    background: var(--ink);
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    align-items: center;
+    justify-items: center;
+    overflow: hidden;
+    padding: 60px 40px;
+  }
+
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  /* Decorative calendar-style number */
+  .big-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(120px, 18vw, 200px);
+    font-weight: 700;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    grid-row: 1 / 4;
+    grid-column: 1;
+    z-index: 1;
+  }
+
+  .countdown-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 40px 48px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    width: 320px;
+    grid-row: 1;
+    grid-column: 2;
+    z-index: 2;
+  }
+
+  .countdown-card .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .countdown-card .days {
+    font-family: 'Playfair Display', serif;
+    font-size: 88px;
+    color: var(--sand);
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  .countdown-card .days-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 8px;
+    letter-spacing: 0.15em;
+  }
+
+  .countdown-card .friend-name {
+    margin-top: 24px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .countup-card {
+    background: rgba(212, 169, 106, 0.08);
+    border: 1px solid rgba(212, 169, 106, 0.2);
+    border-radius: 16px;
+    padding: 40px 48px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    width: 320px;
+    grid-row: 3;
+    grid-column: 2;
+    z-index: 2;
+  }
+
+  .countup-card .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: rgba(212, 169, 106, 0.6);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .countup-card .days {
+    font-family: 'Playfair Display', serif;
+    font-size: 88px;
+    color: #d4a96a;
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  .countup-card .days-label {
+    font-size: 0.8rem;
+    color: rgba(212, 169, 106, 0.5);
+    margin-top: 8px;
+    letter-spacing: 0.15em;
+  }
+
+  .countup-card .friend-name {
+    margin-top: 24px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    color: rgba(212, 169, 106, 0.7);
+  }
+
+  .hero-bg-circles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-bg-circles span {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .hero-bg-circles span:nth-child(1) { width: 600px; height: 600px; top: -100px; right: -200px; }
+  .hero-bg-circles span:nth-child(2) { width: 400px; height: 400px; bottom: -50px; left: -100px; }
+  .hero-bg-circles span:nth-child(3) { width: 200px; height: 200px; top: 40%; left: 30%; }
+
+  /* ── SECTION COMMON ── */
+  section {
+    padding: var(--section-gap) 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    color: #6b5f52;
+    max-width: 560px;
+    line-height: 2;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--light-line);
+    margin: 0;
+  }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--light-line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 64px;
+  }
+
+  .stat-item {
+    padding: 40px 32px;
+    border-right: 1px solid var(--light-line);
+    transition: background 0.3s;
+  }
+
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: var(--warm); }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-unit {
+    font-size: 0.9rem;
+    color: var(--dust);
+    margin-left: 4px;
+  }
+
+  .stat-desc {
+    font-size: 0.82rem;
+    color: #7a6e64;
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+
+  /* ── TIMELINE ── */
+  #timeline {
+    background: var(--cream);
+  }
+
+  .timeline-container {
+    position: relative;
+    padding: 40px 0;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--sand), transparent);
+    transform: translateX(-50%);
+  }
+
+  .timeline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content {
+    grid-column: 1;
+    text-align: right;
+  }
+
+  .timeline-item:nth-child(even) .timeline-content {
+    grid-column: 3;
+    text-align: left;
+  }
+
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--sand);
+    border: 3px solid var(--ink);
+    grid-column: 2;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 4px var(--cream);
+  }
+
+  .timeline-content {
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--light-line);
+    border-radius: 12px;
+    transition: all 0.3s;
+  }
+
+  .timeline-content:hover {
+    border-color: var(--sand);
+    box-shadow: 0 8px 24px rgba(212, 169, 106, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .timeline-date {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+  }
+
+  .timeline-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .timeline-location {
+    font-size: 0.85rem;
+    color: var(--dust);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .timeline-description {
+    font-size: 0.9rem;
+    color: #6b5f52;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .timeline-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 0.78rem;
+    color: var(--dust);
+    padding-top: 12px;
+    border-top: 1px solid var(--light-line);
+  }
+
+  .timeline-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ── PROBLEM ── */
+  #problem {
+    background: var(--warm);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .problem-card {
+    padding: 36px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid var(--light-line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--terracotta), var(--sand));
+  }
+
+  .problem-card .icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .problem-card h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .problem-card p {
+    font-size: 0.9rem;
+    color: #6b5f52;
+    line-height: 1.9;
+  }
+
+  .vs-strip {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .vs-col {
+    padding: 32px;
+    border-radius: 12px;
+  }
+
+  .vs-col.before {
+    background: #f0ebe3;
+    border: 1px solid #ddd5c8;
+  }
+
+  .vs-col.after {
+    background: #1a1612;
+    color: white;
+    border: 1px solid #333;
+  }
+
+  .vs-col .vs-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  .vs-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .vs-col ul li {
+    font-size: 0.88rem;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .vs-col ul li::before {
+    content: '—';
+    opacity: 0.4;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .vs-col.after ul li::before {
+    content: '✦';
+    color: var(--sand);
+    opacity: 1;
+  }
+
+  .vs-divider {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--dust);
+    text-align: center;
+  }
+
+  /* ── PRODUCT ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+
+  .feature-card {
+    padding: 32px;
+    border: 1px solid var(--light-line);
+    border-radius: 12px;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .feature-card:hover {
+    border-color: var(--terracotta);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(196, 96, 58, 0.08);
+  }
+
+  .feature-card .emoji {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .feature-card h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .feature-card p {
+    font-size: 0.85rem;
+    color: #7a6e64;
+    line-height: 1.9;
+  }
+
+  /* ── FLOW ── */
+  .flow-steps {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .flow-steps::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--light-line), var(--light-line), transparent);
+  }
+
+  .flow-step {
+    text-align: center;
+    padding: 0 16px;
+    position: relative;
+  }
+
+  .flow-step .step-dot {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid var(--light-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s;
+  }
+
+  .flow-step:hover .step-dot {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    transform: scale(1.1);
+  }
+
+  .flow-step h4 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .flow-step p {
+    font-size: 0.78rem;
+    color: #8a7e74;
+    line-height: 1.7;
+  }
+
+  /* ── CONSTRAINTS ── */
+  #constraints {
+    background: var(--ink);
+    color: white;
+  }
+
+  #constraints .section-label {
+    color: var(--sand);
+  }
+
+  #constraints .section-label::before {
+    background: var(--sand);
+  }
+
+  #constraints .section-title { color: white; }
+
+  #constraints .section-desc { color: rgba(255,255,255,0.5); }
+
+  .constraints-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 64px;
+  }
+
+  .constraints-table th {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dust);
+    text-align: left;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-weight: 400;
+  }
+
+  .constraints-table td {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem;
+  }
+
+  .constraints-table tr:hover td {
+    background: rgba(255,255,255,0.03);
+  }
+
+  .constraints-table td:first-child {
+    color: var(--sand);
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+  }
+
+  .constraints-table td:nth-child(2) {
+    color: rgba(255,255,255,0.8);
+  }
+
+  .constraints-table td:last-child {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.82rem;
+  }
+
+  /* ── GROWTH ── */
+  .phases {
+    margin-top: 64px;
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--light-line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr;
+    border-bottom: 1px solid var(--light-line);
+    transition: background 0.2s;
+  }
+
+  .phase-row:last-child { border-bottom: none; }
+  .phase-row:hover { background: var(--warm); }
+
+  .phase-num {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-right: 1px solid var(--light-line);
+    gap: 4px;
+  }
+
+  .phase-num .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    line-height: 1;
+  }
+
+  .phase-num .time {
+    font-size: 0.72rem;
+    color: var(--dust);
+    letter-spacing: 0.1em;
+  }
+
+  .phase-content {
+    padding: 32px;
+    border-right: 1px solid var(--light-line);
+  }
+
+  .phase-content h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .phase-content p {
+    font-size: 0.85rem;
+    color: #6b5f52;
+    line-height: 1.9;
+  }
+
+  .phase-goals {
+    padding: 32px;
+  }
+
+  .phase-goals ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .phase-goals ul li {
+    font-size: 0.82rem;
+    color: #7a6e64;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .phase-goals ul li::before {
+    content: '◆';
+    color: var(--sand);
+    font-size: 0.55rem;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  /* ── COMPETITION ── */
+  .comp-table-wrap {
+    overflow-x: auto;
+    margin-top: 64px;
+    border: 1px solid var(--light-line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .comp-table th {
+    background: var(--ink);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    padding: 18px 20px;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .comp-table th:first-child {
+    color: white;
+    font-weight: 500;
+  }
+
+  .comp-table td {
+    padding: 18px 20px;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--light-line);
+    vertical-align: top;
+  }
+
+  .comp-table tr:last-child td { border-bottom: none; }
+
+  .comp-table tr.highlight td {
+    background: #fdf6ee;
+  }
+
+  .comp-table td:first-child {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    color: var(--terracotta);
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+
+  .tag.yes { background: #e8f3e8; color: #4a7a4a; }
+  .tag.no { background: #f3e8e8; color: #7a4a4a; }
+  .tag.partial { background: #f3ede0; color: #7a5a30; }
+
+  /* ── TECH ── */
+  #tech {
+    background: var(--warm);
+  }
+
+  .tech-stack {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .tech-card {
+    background: white;
+    border: 1px solid var(--light-line);
+    border-radius: 12px;
+    padding: 36px;
+  }
+
+  .tech-card h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tech-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tech-card ul li {
+    font-size: 0.85rem;
+    color: #5a4e44;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .tech-card ul li .badge {
+    background: var(--warm);
+    border: 1px solid var(--light-line);
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-size: 0.7rem;
+    color: var(--terracotta);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── BUSINESS ── */
+  .biz-grid {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .biz-card {
+    padding: 36px;
+    border: 1px solid var(--light-line);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .biz-card .biz-phase {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+
+  .biz-card h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .biz-card p {
+    font-size: 0.82rem;
+    color: #7a6e64;
+    line-height: 1.9;
+  }
+
+  .biz-card .biz-amount {
+    margin-top: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .biz-card .biz-amount span {
+    font-size: 0.85rem;
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--dust);
+    font-weight: 300;
+  }
+
+  /* ── CLOSING ── */
+  #closing {
+    background: var(--ink);
+    color: white;
+    text-align: center;
+    padding: 160px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #closing .big-bg {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 28vw;
+    font-weight: 700;
+    color: rgba(255,255,255,0.02);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  #closing .content {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  #closing .quote {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.6;
+    color: white;
+    margin-bottom: 32px;
+  }
+
+  #closing .quote em {
+    color: var(--sand);
+    font-style: normal;
+  }
+
+  #closing .sub {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.9;
+    margin-bottom: 56px;
+  }
+
+  .contact-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .contact-item {
+    text-align: left;
+  }
+
+  .contact-item .c-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 6px;
+  }
+
+  .contact-item .c-value {
+    font-size: 0.92rem;
+    color: var(--sand);
+  }
+
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer span {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+    animation-delay: var(--delay, 0s);
+  }
+
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+  .delay-4 { animation-delay: 0.6s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 340px; }
+    .hero-left { padding: 120px 24px 48px; }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .problem-grid { grid-template-columns: 1fr; gap: 24px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .flow-steps { grid-template-columns: repeat(3, 1fr); }
+    .flow-steps::before { display: none; }
+    .phase-row { grid-template-columns: 80px 1fr; }
+    .phase-goals { display: none; }
+    .tech-stack { grid-template-columns: 1fr; }
+    .biz-grid { grid-template-columns: 1fr; }
+    .vs-strip { grid-template-columns: 1fr; }
+    .vs-divider { display: none; }
+    .timeline-line { display: none; }
+    .timeline-item {
+      grid-template-columns: 1fr;
+    }
+    .timeline-item .timeline-content {
+      grid-column: 1;
+      text-align: left;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: 0;
+      top: 24px;
+    }
+    .timeline-content {
+      padding-left: 32px;
+      margin-top: 0;
+      margin-left: 8px;
+      border-left: 2px solid var(--sand);
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      border-left: 2px solid var(--sand);
+    }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">见一面多一面</a>
+  <ul class="nav-links">
+    <li><a href="#problem">痛点</a></li>
+    <li><a href="#product">产品</a></li>
+    <li><a href="#competition">竞品</a></li>
+    <li><a href="#tech">技术</a></li>
+    <li><a href="#growth">路径</a></li>
+    <li><a href="#business">商业</a></li>
+    <li><a href="#closing">联系</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow fade-up">产品计划书 · 2026</p>
+    <h1 class="hero-title fade-up delay-1">
+      见一面
+      <em>多一面</em>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      每一次相聚，都值得被记住。<br>
+      用时间轴记录你和每一位朋友的每一次见面——
+      距离上次，已经多少天了？
+    </p>
+    <blockquote class="hero-quote fade-up delay-3">
+      「不是因为忙碌才忘记，<br>是因为没有记录才觉得遥远。」
+    </blockquote>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-bg-circles">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="countdown-card fade-up delay-2">
+      <div class="label">与小依上次见面已经</div>
+      <div class="days">430</div>
+      <div class="days-label">天 · DAYS</div>
+      <div class="friend-name">起始日：2025-02-16 星期日</div>
+    </div>
+    <div class="countup-card fade-up delay-3">
+      <div class="label">距离下次相见</div>
+      <div class="days">61</div>
+      <div class="days-label">天 · COUNTING UP</div>
+      <div class="friend-name">计划日：2026-06-23 星期二</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TIMELINE - 见面历史 -->
+<section id="timeline">
+  <div class="container">
+    <p class="section-label">时间线</p>
+    <h2 class="section-title">我们的每一次相聚</h2>
+    <p class="section-desc">
+      翻看过往，你会发现每一个见面都是珍贵的。这是我们共同拥有的回忆。
+    </p>
+
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      <div class="timeline-items">
+        
+        <div class="timeline-item fade-up">
+          <div class="timeline-content">
+            <div class="timeline-date">2025 年 2 月 16 日</div>
+            <div class="timeline-title">春节前的聚会</div>
+            <div class="timeline-location">📍 杭州 · 西湖边</div>
+            <div class="timeline-description">
+              在春天的第一缕阳光下，我们在西湖边走了一圈，聊了很多话。你说这个春天一定会有好事发生。
+            </div>
+            <div class="timeline-meta">
+              <span>📸 5 张照片</span>
+              <span>💬 147 字</span>
+            </div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-item fade-up" style="--delay: 0.1s;">
+          <div class="timeline-content">
+            <div class="timeline-date">2024 年 10 月 12 日</div>
+            <div class="timeline-title">国庆后的咖啡时光</div>
+            <div class="timeline-location">📍 杭州 · 南山路咖啡厅</div>
+            <div class="timeline-description">
+              连假后第一次见面，在老咖啡馆里坐了一下午。你点的那杯热巧克力，现在还能想起来的味道。
+            </div>
+            <div class="timeline-meta">
+              <span>📸 3 张照片</span>
+              <span>💬 89 字</span>
+            </div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-item fade-up" style="--delay: 0.2s;">
+          <div class="timeline-content">
+            <div class="timeline-date">2024 年 7 月 8 日</div>
+            <div class="timeline-title">夏日晚餐</div>
+            <div class="timeline-location">📍 杭州 · 南宋御街</div>
+            <div class="timeline-description">
+              那个晚上很闷热，但见到你就感觉清爽了很多。我们在昏黄的路灯下，谈了很多关于未来的梦想。
+            </div>
+            <div class="timeline-meta">
+              <span>📸 7 张照片</span>
+              <span>💬 203 字</span>
+            </div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-item fade-up" style="--delay: 0.3s;">
+          <div class="timeline-content">
+            <div class="timeline-date">2024 年 4 月 21 日</div>
+            <div class="timeline-title">春游茶山</div>
+            <div class="timeline-location">📍 杭州 · 龙井茶山</div>
+            <div class="timeline-description">
+              春天的茶山绿意盎然，我们一起采了茶，那是第一次一起做同一件事。你说这样的时刻最珍贵。
+            </div>
+            <div class="timeline-meta">
+              <span>📸 9 张照片</span>
+              <span>💬 156 字</span>
+            </div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-item fade-up" style="--delay: 0.4s;">
+          <div class="timeline-content">
+            <div class="timeline-date">2024 年 1 月 15 日</div>
+            <div class="timeline-title">新年第一次见面</div>
+            <div class="timeline-location">📍 杭州 · 清河坊</div>
+            <div class="timeline-description">
+              新年伊始，我们在古街上漫步，买了手工年糕，聊着新一年各自的期许和计划。
+            </div>
+            <div class="timeline-meta">
+              <span>📸 4 张照片</span>
+              <span>💬 132 字</span>
+            </div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <p class="section-label">01 · 洞察</p>
+    <h2 class="section-title">我们是怎么忘记彼此的</h2>
+    <p class="section-desc">
+      长大后，时间变得很宝贵，我们只会将有限的时间分给有限的人。为什么在情侣的亲密关系中有纪念日，而在友谊中却很少人提及？或许只是因为我们缺少一个记录每次见面的工具。
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="icon">📅</span>
+        <h3>记录工具太原始</h3>
+        <p>现有方法只能靠倒计时软件手动记录一个数字，没有照片、没有文字、没有故事——见面变成一个冷冰冰的天数。</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">🔗</span>
+        <h3>记忆只属于一方</h3>
+        <p>你记录了，对方不知道。你们共同的记忆，却只存在你的手机里，没有共享、无法共同感受那种"好久不见"的重量。</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">📸</span>
+        <h3>照片散落各处</h3>
+        <p>见面的照片散落在相册、微信、群聊里，找不到、理不清，时间久了连那次聚会在哪里都想不起来。</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">💬</span>
+        <h3>感情缺乏可见度</h3>
+        <p>你和某个朋友已经 966 天没见了，但你直到打开 App 才意识到。亲密关系需要一面镜子，照出那些被忽略的时光。</p>
+      </div>
+    </div>
+
+    <div class="vs-strip">
+      <div class="vs-col before">
+        <div class="vs-label">现在的方式</div>
+        <ul>
+          <li>手动记一个倒计时数字</li>
+          <li>照片散落在相册和微信群</li>
+          <li>只有自己看得到</li>
+          <li>没有多人聚会的关联</li>
+          <li>换手机后全部消失</li>
+        </ul>
+      </div>
+      <div class="vs-divider">→</div>
+      <div class="vs-col after">
+        <div class="vs-label">见一面多一面</div>
+        <ul>
+          <li>记录时间、地点、照片、感想</li>
+          <li>双方都能看到，共同拥有记忆</li>
+          <li>多对关系同步更新</li>
+          <li>一次聚会关联所有参与人</li>
+          <li>永久云端存储，换机不丢</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRODUCT -->
+<section id="product">
+  <div class="container">
+    <p class="section-label">02 · 产品</p>
+    <h2 class="section-title">每次相聚，都是一个故事</h2>
+    <p class="section-desc">
+      我们珍视每一个见面的时刻，也期待彼此的再见。用一个简单的产品，记录见面，期待下次相聚，一起创造更多见面的时刻。
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="emoji">⏱</span>
+        <h3>见面计时器</h3>
+        <p>和每位朋友的关系主页，展示距上次见面的天数，以及历史见面次数总计。</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">📍</span>
+        <h3>见面记录</h3>
+        <p>记录日期、地点、参与人，上传最多 9 张照片，写最多 2000 字的感想。简单、克制、刚刚好。</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔗</span>
+        <h3>双向可见</h3>
+        <p>一方记录后生成邀请卡，对方点击即可加入这次见面。记忆从此是两个人共同拥有的。</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">👥</span>
+        <h3>多人聚会</h3>
+        <p>一次聚会可关联多个参与者，同时更新所有人之间的关系计时器。</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🗂</span>
+        <h3>时间轴</h3>
+        <p>每段关系都有一条完整的见面时间线——几月几日，在哪里，说了什么，留下了什么。</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔔</span>
+        <h3>温柔提醒</h3>
+        <p>「你和小依已经 500 天没见了」</p>
+        <p> 「你和云还有30天要见面了！」</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 80px;">
+      <p class="section-label">核心流程</p>
+      <h3 class="section-title" style="font-size: 1.5rem;">一次见面，怎么记录</h3>
+    </div>
+
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-dot">🤝</div>
+        <h4>添加好友</h4>
+        <p>通过微信搜索或扫码，建立关系，计时器从此刻开始</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-dot">📝</div>
+        <h4>记录见面</h4>
+        <p>任意一方发起，填写日期、地点、照片和感想</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-dot">💌</div>
+        <h4>发送邀请卡</h4>
+        <p>生成一张漂亮的见面卡片，发给参与的朋友</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-dot">✅</div>
+        <h4>对方确认</h4>
+        <p>朋友点击加入，共同拥有这次见面的记忆</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-dot">📖</div>
+        <h4>翻看时间线</h4>
+        <p>在关系详情页，回看所有见面记录，感受时光</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONSTRAINTS & DESIGN PRINCIPLES -->
+<section id="constraints">
+  <div class="container">
+    <p class="section-label">03 · 设计原则</p>
+    <h2 class="section-title">克制，才是尊重</h2>
+    <p class="section-desc" style="color: rgba(255,255,255,0.5);">
+      时间很宝贵，不应该被产品浪费。每一个限制都有意为之——保持记录的仪式感和庄重，控制存储成本，也让用户为"珍视每一个见面"而感到安心，而非焦虑。
+    </p>
+
+    <table class="constraints-table">
+      <thead>
+        <tr>
+          <th>限制项</th>
+          <th>设定值</th>
+          <th>设计理由</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>每次见面照片数</td>
+          <td>最多 9 张</td>
+          <td>符合微信心理阈值，够记录不会滥拍</td>
+        </tr>
+        <tr>
+          <td>图片上传压缩</td>
+          <td>≤ 800 KB / 张</td>
+          <td>前端压缩，减少后端存储成本约 70%</td>
+        </tr>
+        <tr>
+          <td>每次见面感想字数</td>
+          <td>500 字以内</td>
+          <td>够写真实感受，不变成写日记的压力</td>
+        </tr>
+        <tr>
+          <td>免费好友上限</td>
+          <td>7 人</td>
+          <td>对普通用户足够，高频社交者可付费解锁</td>
+        </tr>
+        <tr>
+          <td>照片云端保存期</td>
+          <td>免费版 3 年滚动</td>
+          <td>平衡存储成本与用户体验，付费版永久保存</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COMPETITION -->
+<section id="competition">
+  <div class="container">
+    <p class="section-label">04 · 竞品</p>
+    <h2 class="section-title">现有产品的空白地带</h2>
+    <p class="section-desc">没有任何一款产品，把"双人共享的见面记忆"作为核心。这是我们的切入点。</p>
+
+    <div class="comp-table-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>产品</th>
+            <th>定位</th>
+            <th>见面计时</th>
+            <th>双人共享</th>
+            <th>多人聚会</th>
+            <th>照片记录</th>
+            <th>时间线</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td>见一面多一面</td>
+            <td>好友见面记录</td>
+            <td><span class="tag yes">✦ 核心功能</span></td>
+            <td><span class="tag yes">✦ 双向可见</span></td>
+            <td><span class="tag yes">✦ 支持</span></td>
+            <td><span class="tag yes">✦ 9张+感想</span></td>
+            <td><span class="tag yes">✦ 完整</span></td>
+          </tr>
+          <tr>
+            <td>Days Matter（倒计日）</td>
+            <td>个人倒计时</td>
+            <td><span class="tag yes">仅数字</span></td>
+            <td><span class="tag no">不支持</span></td>
+            <td><span class="tag no">不支持</span></td>
+            <td><span class="tag no">不支持</span></td>
+            <td><span class="tag no">不支持</span></td>
+          </tr>
+          <tr>
+            <td>微信相册</td>
+            <td>社交图片分享</td>
+            <td><span class="tag no">无</span></td>
+            <td><span class="tag partial">群组</span></td>
+            <td><span class="tag yes">支持</span></td>
+            <td><span class="tag yes">无限制</span></td>
+            <td><span class="tag no">无</span></td>
+          </tr>
+          <tr>
+            <td>相册 App（Apple / Google）</td>
+            <td>个人照片管理</td>
+            <td><span class="tag no">无</span></td>
+            <td><span class="tag partial">共享相簿</span></td>
+            <td><span class="tag partial">共享相簿</span></td>
+            <td><span class="tag yes">无限制</span></td>
+            <td><span class="tag partial">按时间</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stats-row" style="margin-top: 48px;">
+      <div class="stat-item">
+        <div class="stat-number">0<span class="stat-unit">款</span></div>
+        <div class="stat-desc">专注于"好友间见面记录"<br>的产品</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5<span class="stat-unit">亿+</span></div>
+        <div class="stat-desc">中国微信月活用户，<br>潜在目标市场</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-number">小程序</div>
+        <div class="stat-desc">最优载体，<br>无需下载即可传播</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TECH
+<section id="tech">
+  <div class="container">
+    <p class="section-label">05 · 技术架构</p>
+    <h2 class="section-title">轻量、快速、可扩展</h2>
+    <p class="section-desc">选择微信小程序 + 云开发，降低开发门槛，快速验证产品，无需自建服务器。</p>
+
+    <div class="tech-stack">
+      <div class="tech-card">
+        <h3>📱 前端</h3>
+        <ul>
+          <li><span class="badge">框架</span>微信小程序原生 / uni-app（一套代码跑多端）</li>
+          <li><span class="badge">UI</span>自研组件，温暖纸质感视觉风格</li>
+          <li><span class="badge">图片</span>前端压缩至 800KB，减少上传体积</li>
+          <li><span class="badge">地图</span>腾讯地图 API，自动获取位置</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <h3>☁️ 后端 · 云开发</h3>
+        <ul>
+          <li><span class="badge">数据库</span>微信云数据库，存储用户、关系、见面记录</li>
+          <li><span class="badge">存储</span>云存储，存放压缩后的照片文件</li>
+          <li><span class="badge">登录</span>微信 openid 作为唯一用户标识，无需注册</li>
+          <li><span class="badge">推送</span>订阅消息，用于见面邀请和提醒通知</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <h3>🗃 核心数据模型</h3>
+        <ul>
+          <li><span class="badge">users</span>openid、昵称、头像</li>
+          <li><span class="badge">friendships</span>userA、userB、建立时间</li>
+          <li><span class="badge">meetings</span>日期、地点、参与人、照片、感想</li>
+          <li><span class="badge">invites</span>邀请卡状态，关联 meeting_id</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <h3>🔒 隐私设计</h3>
+        <ul>
+          <li><span class="badge">可见性</span>见面记录仅参与人可见，不对外公开</li>
+          <li><span class="badge">权限</span>每条记录绑定参与人 openid，后端鉴权</li>
+          <li><span class="badge">删除</span>任意一方可退出一次见面记录</li>
+          <li><span class="badge">合规</span>遵循《个人信息保护法》，按需授权</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"> -->
+
+<!-- GROWTH -->
+<!-- <section id="growth">
+  <div class="container">
+    <p class="section-label">06 · 增长路径</p>
+    <h2 class="section-title">冷启动：用一次见面带来一个用户</h2>
+    <p class="section-desc">
+      产品的核心传播机制：我记录了我们的见面 → 发给你看这个纪念 → 你因为想保留这段友谊的证明而安装。
+      不靠广告，靠对彼此关系的珍视。
+    </p>
+
+    <div class="phases">
+      <div class="phase-row">
+        <div class="phase-num">
+          <span class="num">01</span>
+          <span class="time">0–2 个月</span>
+        </div>
+        <div class="phase-content">
+          <h3>MVP · 自用验证</h3>
+          <p>只做"单人记录 + 自己看"，核心路径跑通，不做双人邀请，验证记录体验是否顺畅。</p>
+        </div>
+        <div class="phase-goals">
+          <ul>
+            <li>核心流程可用</li>
+            <li>照片上传 + 压缩</li>
+            <li>时间线展示</li>
+            <li>创始人自己每天用</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">
+          <span class="num">02</span>
+          <span class="time">2–4 个月</span>
+        </div>
+        <div class="phase-content">
+          <h3>双人邀请 · 冷启动</h3>
+          <p>上线邀请卡功能，邀请 50 位朋友内测。通过"你的朋友记录了你们的一次见面"作为传播钩子。</p>
+        </div>
+        <div class="phase-goals">
+          <ul>
+            <li>邀请卡生成 + 分享</li>
+            <li>双向关系绑定</li>
+            <li>次日留存 &gt; 40%</li>
+            <li>邀请转化率 &gt; 50%</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">
+          <span class="num">03</span>
+          <span class="time">4–8 个月</span>
+        </div>
+        <div class="phase-content">
+          <h3>多人聚会 + 提醒</h3>
+          <p>支持多人聚会关联，上线温柔提醒推送（"已经 100 天了"），打磨分享卡片样式，社交媒体自然传播。</p>
+        </div>
+        <div class="phase-goals">
+          <ul>
+            <li>多人聚会逻辑</li>
+            <li>订阅消息推送</li>
+            <li>可分享的年度总结</li>
+            <li>月活 &gt; 1,000</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">
+          <span class="num">04</span>
+          <span class="time">8 个月+</span>
+        </div>
+        <div class="phase-content">
+          <h3>付费 + 规模化</h3>
+          <p>上线付费会员（解锁无限好友、永久存储、高清原图），探索"年度见面报告"等病毒传播内容。</p>
+        </div>
+        <div class="phase-goals">
+          <ul>
+            <li>付费转化 &gt; 5%</li>
+            <li>月活 &gt; 10,000</li>
+            <li>年度报告传播</li>
+            <li>正向现金流</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"> -->
+
+<!-- BUSINESS -->
+<!-- <section id="business">
+  <div class="container">
+    <p class="section-label">07 · 商业模式</p>
+    <h2 class="section-title">情感价值，可以变现</h2>
+    <p class="section-desc">核心逻辑：我们为不配被遗忘的友谊提供记录工具，用户为珍视彼此的关系而愿意付溢价。</p>
+
+    <div class="biz-grid">
+      <div class="biz-card">
+        <div class="biz-phase">Phase 1 · 免费获客</div>
+        <h3>免费版</h3>
+        <p>50 个好友上限，照片 3 年存储，基础功能全开放，建立用户习惯。</p>
+        <div class="biz-amount">¥0 <span>/ 永久</span></div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-phase">Phase 2 · 付费转化</div>
+        <h3>高级会员</h3>
+        <p>无限好友、永久存储原图、去除限制、优先新功能体验、专属年度报告。</p>
+        <div class="biz-amount">¥28 <span>/ 月 或 ¥198 / 年</span></div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-phase">Phase 3 · 生态扩展</div>
+        <h3>纪念品定制</h3>
+        <p>基于见面记录生成实体照片书、纪念卡片，按需定制，高毛利。</p>
+        <div class="biz-amount">¥68+ <span>/ 件</span></div>
+      </div>
+    </div>
+
+    <div class="stats-row" style="margin-top: 48px;">
+      <div class="stat-item">
+        <div class="stat-number">&gt;5<span class="stat-unit">%</span></div>
+        <div class="stat-desc">目标付费转化率<br>（行业对标：相册类 App）</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">¥198</div>
+        <div class="stat-desc">年费客单价<br>低于一顿饭，高于日均使用价值</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">&gt;80<span class="stat-unit">%</span></div>
+        <div class="stat-desc">订阅收入毛利率<br>纯软件，边际成本极低</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">口碑</div>
+        <div class="stat-desc">主要获客方式<br>邀请卡 + 年度报告自传播</div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<hr class="divider">
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="big-bg">见</div>
+  <div class="content">
+    <p class="section-label" style="justify-content: center; color: var(--sand);">
+      <span style="width:24px;height:1px;background:var(--sand);display:inline-block"></span>
+      核心理念
+    </p>
+    <div class="quote">
+      「长大之后，时间很宝贵。<br>
+      我们只会把时间分给有限的人。<br>
+      所以每次见面，都应该被<em>记住</em>。」
+    </div>
+    <p class="sub">
+      我珍视每一个见面的时刻，<br>
+      也期待我们的再见，一起创造更多见面的时刻。
+    </p>
+
+    <div class="contact-row">
+      <div class="contact-item">
+        <div class="c-label">产品</div>
+        <div class="c-value">见一面多一面</div>
+      </div>
+      <div class="contact-item">
+        <div class="c-label">形态</div>
+        <div class="c-value">微信小程序</div>
+      </div>
+      <div class="contact-item">
+        <div class="c-label">阶段</div>
+        <div class="c-value">概念 · 寻找合伙人</div>
+      </div>
+      <div class="contact-item">
+        <div class="c-label">年份</div>
+        <div class="c-value">2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>「见一面多一面」· 产品计划书 · 2026</span>
+  <span>每次相聚，都值得被记住</span>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card, .problem-card, .phase-row, .biz-card, .tech-card, .flow-step, .stat-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Stagger children
+  document.querySelectorAll('.feature-grid, .stats-row, .biz-grid, .flow-steps').forEach(grid => {
+    Array.from(grid.children).forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.08}s`;
+    });
+  });
+</script>
+
+</body>
+</html>
